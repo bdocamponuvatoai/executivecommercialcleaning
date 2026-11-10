@@ -25,24 +25,34 @@ npm run preview    # serves out/ on http://localhost:3000
 | Script                 | What it does                                                              |
 | ---------------------- | ------------------------------------------------------------------------- |
 | `npm run dev`          | Development server with fast refresh.                                     |
-| `npm run build`        | Static export to `out/`, then `postbuild` runs the two scripts below.     |
+| `npm run build`        | Static export to `out/`, then `postbuild` runs the Windows fix below.     |
 | `npm run preview`      | Serves `out/` locally with `serve` (fetched on demand, not a dependency). |
+| `npm run images`       | Regenerates the responsive image sizes (see Images below).                |
+| `npm run images:check` | Fails if the image sizes are out of date with `src/assets/images`.        |
 | `npm run lint`         | ESLint with the Next.js core-web-vitals and TypeScript rules.             |
 | `npm run typecheck`    | Generates route types (`next typegen`), then runs `tsc --noEmit`.         |
 | `npm run format`       | Formats everything with Prettier.                                         |
 | `npm run format:check` | Fails if anything is not Prettier-formatted.                              |
-| `npm run check`        | `typecheck`, `lint` and `format:check` together. CI runs this.            |
+| `npm run check`        | `images:check`, `typecheck`, `lint` and `format:check`. CI runs this.     |
 
-Post-build scripts:
+`scripts/fix-export-segments.mjs` runs after every build. It works around a Next.js static-export
+bug on Windows, where prefetch files are written into nested folders and client-side prefetches 404. It does nothing on other platforms.
 
-- `scripts/fix-export-segments.mjs` works around a Next.js static-export bug on Windows, where
-  prefetch files are written into nested folders and client-side prefetches 404. It does nothing
-  on other platforms.
-- `scripts/resize-images.mjs` writes the responsive image sizes. Static exports have no image
-  server, so `src/lib/image-loader.ts` points each `srcset` entry at a file such as
-  `work-salon.<hash>.w768.webp`, and this script creates every size the built pages reference
-  (with `sharp`). Widths are set by `images.deviceSizes` and `images.imageSizes` in
-  `next.config.ts`.
+## Images
+
+Static exports have no image server, so the responsive sizes are made ahead of time and committed:
+
+1. Put the original in `src/assets/images` and import it statically (see `src/content/images.ts`).
+2. Run `npm run images`. `scripts/generate-image-variants.mjs` writes every narrower size to
+   `public/image-variants/` (for example `work-salon.w768.<hash>.webp`) and regenerates
+   `src/lib/image-variants.ts`, the list `src/lib/image-loader.ts` reads to fill each `srcset`.
+3. Commit the images, the variants and the generated module together. `npm run check` (and CI)
+   fails if they are out of date.
+
+The widths come from `src/config/image-sizes.json`, which `next.config.ts` also reads. Each file
+name carries a hash of its source and settings, so `vercel.json` caches `/image-variants/` for a
+year. Do not resize images in a post-build step: on Vercel, files added to `out/` after
+`next build` are not deployed.
 
 ## Structure
 
@@ -61,11 +71,14 @@ src/
   config/
     site.ts            Business details and navigation (safe for client code)
     deployment.ts      SITE_URL / SITE_INDEXABLE handling (build time, server only)
+    image-sizes.json   Responsive image widths (shared by next.config.ts and npm run images)
   content/             Typed copy: services, spaces, FAQ, gallery, form options, images
-  lib/                 Framework-free helpers: metadata, walkthrough message and mailto, image loader
+  lib/                 Framework-free helpers: metadata, walkthrough message and mailto, image
+                       loader (image-variants.ts is generated)
   styles/              globals.css imports ordered partials: base, components, sections, pages
   assets/              Images and the Mona Sans font, imported statically
-scripts/               Post-build: fix-export-segments.mjs, resize-images.mjs
+public/image-variants/ Generated responsive image sizes (npm run images)
+scripts/               generate-image-variants.mjs, fix-export-segments.mjs (post-build)
 docs/                  Content provenance and verification notes
 ```
 
@@ -138,10 +151,12 @@ Actions updates monthly.
 
 ## Hosting
 
-Vercel detects Next.js and serves the static export from `out/`. `vercel.json` adds security
+Vercel detects Next.js and deploys the static export from what `next build` produces (its
+adapter also serves hashed assets from `/_next/static/immutable/`). `vercel.json` adds security
 headers (`X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, `Permissions-Policy`,
-`Strict-Transport-Security`). No Content-Security-Policy is set yet; one must be tested against
-Next.js’s inline scripts before it is added.
+`Strict-Transport-Security`) and a one-year cache for `/image-variants/`. No
+Content-Security-Policy is set yet; one must be tested against Next.js’s inline scripts before it
+is added.
 
 Set environment variables per environment in the Vercel project settings:
 
@@ -150,4 +165,5 @@ Set environment variables per environment in the Vercel project settings:
 
 ### Deployment
 
-Not deployed yet. The preview URL goes here once the project is imported into Vercel.
+Production: https://executivecommercialcleaning.vercel.app (deploys from `main`). Still
+`noindex` until the owner approves launch.

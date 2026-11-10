@@ -12,14 +12,14 @@ sites and their JSON outcomes were compared.
 
 ## Build and code checks
 
-| Check                   | Result                                                                                   |
-| ----------------------- | ---------------------------------------------------------------------------------------- |
-| `npm run build`         | Pass. 17 routes, all static. Postbuild: 11 prefetch files fixed, 37 image sizes written. |
-| `npm run typecheck`     | Pass                                                                                     |
-| `npm run lint`          | Pass, no warnings                                                                        |
-| `npm run format:check`  | Pass                                                                                     |
-| `npm audit --omit=dev`  | 0 vulnerabilities                                                                        |
-| `npm audit` (incl. dev) | 7 moderate, all from one advisory (see below)                                            |
+| Check                   | Result                                                           |
+| ----------------------- | ---------------------------------------------------------------- |
+| `npm run build`         | Pass. 17 routes, all static. Postbuild: 11 prefetch files fixed. |
+| `npm run typecheck`     | Pass                                                             |
+| `npm run lint`          | Pass, no warnings                                                |
+| `npm run format:check`  | Pass                                                             |
+| `npm audit --omit=dev`  | 0 vulnerabilities                                                |
+| `npm audit` (incl. dev) | 7 moderate, all from one advisory (see below)                    |
 
 The dev-only finding is GHSA-g3hv-75wg-m249 (`minimatch` denial of service via crafted glob
 patterns), reached through `typescript-eslint` inside `eslint-config-next`. It only runs on
@@ -105,7 +105,7 @@ robots.txt). It should rise once `SITE_INDEXABLE=true`.
 
 Changes made because of these runs (home page, same server without compression, to compare):
 
-- Responsive image sizes (`scripts/resize-images.mjs`): performance 68–76 → 78–80, largest paint
+- Responsive image sizes (now made by `npm run images`): performance 68–76 → 78–80, largest paint
   6.8–8.1 s → 5.5–5.6 s, page weight 1,377 → 1,017 KiB. Phones now load the 768 px hero (69 KB)
   instead of the 1,600 px original (192 KB).
 - Favicon: 186 KB → 13 KB (192 px palette PNG).
