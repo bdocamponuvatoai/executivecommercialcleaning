@@ -1,0 +1,43 @@
+.about-teaser {
+  display: grid;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.about-teaser > div {
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+}
+
+.about-teaser > div > p {
+  max-width: 34rem;
+}
+
+.about-teaser > div > p:not(.lead) {
+  color: var(--muted);
+}
+
+.about-teaser .actions {
+  gap: 0.75rem 2rem;
+  margin-top: 0.5rem;
+}
+
+.about-teaser figure {
+  max-width: 26rem;
+}
+
+.about-teaser .portrait {
+  aspect-ratio: 1;
+}
+
+.about-teaser .portrait img {
+  object-position: 50% 78%;
+}
+
+@media (min-width: 64rem) {
+  .about-teaser {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: 5rem;
+  }
+}

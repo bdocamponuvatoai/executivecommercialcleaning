@@ -1,0 +1,29 @@
+.checklist {
+  display: grid;
+  gap: 0.875rem;
+}
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: var(--ink);
+}
+
+.checklist .icon {
+  width: 1.375rem;
+  height: 1.375rem;
+  margin-top: 0.1em;
+  padding: 4px;
+  border-radius: 50%;
+  background: var(--leaf-tint);
+  color: var(--leaf-ink);
+  stroke-width: 2.5;
+}
+
+@media (min-width: 40rem) {
+  .checklist-2 {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+  }
+}

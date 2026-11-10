@@ -1,0 +1,35 @@
+{
+  "name": "executive-commercial-cleaning",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Executive Commercial Cleaning LLC, Lee's Summit, Missouri.",
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "postbuild": "node scripts/fix-export-segments.mjs && node scripts/resize-images.mjs",
+    "preview": "npx serve@14 out",
+    "lint": "eslint",
+    "typecheck": "next typegen && tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run typecheck && npm run lint && npm run format:check"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "prettier": "^3",
+    "sharp": "^0.35.5",
+    "typescript": "^5"
+  }
+}

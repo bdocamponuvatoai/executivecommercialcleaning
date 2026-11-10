@@ -1,0 +1,86 @@
+/* Page intro (inner pages) */
+.page-intro {
+  display: grid;
+  gap: 1.5rem;
+  padding-block: clamp(3rem, 7vw, 6rem) clamp(2.5rem, 5vw, 4rem);
+}
+
+.page-intro h1 {
+  max-width: 16ch;
+}
+
+.page-intro .lead {
+  max-width: 40rem;
+}
+
+/* Spaces: "doesn't fit a box" callout */
+.callout {
+  display: grid;
+  justify-items: start;
+  gap: 1.5rem;
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.callout h2 {
+  margin-bottom: 0.75rem;
+  font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.25rem);
+}
+
+.callout p {
+  max-width: 40rem;
+}
+
+/* Privacy */
+.prose {
+  padding-block: clamp(3rem, 7vw, 6rem) var(--space-section);
+}
+
+.prose > * {
+  max-width: 44rem;
+}
+
+.prose h1 {
+  margin-bottom: 1.25rem;
+}
+
+.prose h2 {
+  margin-top: 2.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  font-stretch: 104%;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.prose p a {
+  color: var(--navy-700);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 404 */
+.not-found {
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+  padding-block: clamp(4rem, 10vw, 9rem);
+}
+
+.not-found h1 {
+  max-width: 14ch;
+}
+
+.not-found .actions {
+  margin-top: 1rem;
+}
+
+@media (min-width: 64rem) {
+  .callout {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2.5rem;
+  }
+}

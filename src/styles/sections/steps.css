@@ -1,0 +1,35 @@
+/* Ordered steps (home) and principles (about): a coloured rule tops each item. */
+.process-list,
+.principles {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.process-list li,
+.principles li {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 3px solid var(--tri, var(--line-strong));
+}
+
+.process-list p,
+.principles p {
+  max-width: 22rem;
+  color: var(--muted);
+}
+
+.process-marker {
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+@media (min-width: 48rem) {
+  .process-list,
+  .principles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

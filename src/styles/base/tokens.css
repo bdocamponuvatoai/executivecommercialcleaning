@@ -1,0 +1,37 @@
+:root {
+  /* Brand: sampled from the company logo */
+  --navy-900: #10233f;
+  --navy-800: #142f55;
+  --navy-700: #1a3c69;
+  --sun: #fbba0a;
+  --sky: #6da6d1;
+  --leaf: #a2c95f;
+  --leaf-ink: #3f6a12;
+  --leaf-tint: #e6f0d6;
+
+  /* Neutrals */
+  --ink: #0e1a2b;
+  --text: #3a4656;
+  --muted: #5d6a7a;
+  --line: #e2e7ed;
+  --line-strong: #cbd3dd;
+  --control-hover: #9aa7b6;
+  --surface: #f3f5f8;
+  --paper: #ffffff;
+  --focus: #1d6fd1;
+
+  /* Type */
+  --font-sans:
+    var(--font-mona), "Segoe UI", system-ui, -apple-system, Roboto, Arial,
+    sans-serif;
+
+  /* Shape and space */
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --max: 80rem;
+  --header-h: 4.5rem;
+  --space-section: clamp(4.5rem, 9vw, 8.5rem);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}

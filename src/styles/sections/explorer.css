@@ -1,0 +1,110 @@
+.explorer-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--line-strong);
+  scrollbar-width: none;
+}
+
+.explorer-tabs button {
+  position: relative;
+  flex-shrink: 0;
+  padding: 0.875rem 1rem;
+  border: 0;
+  background: none;
+  font-size: 1rem;
+  font-weight: 560;
+  white-space: nowrap;
+  color: var(--muted);
+  transition: color 0.2s var(--ease);
+}
+
+.explorer-tabs button:first-child {
+  padding-left: 0;
+}
+
+.explorer-tabs button:hover,
+.explorer-tabs button[aria-selected="true"] {
+  color: var(--ink);
+}
+
+.explorer-tabs button[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  bottom: -1px;
+  left: 1rem;
+  height: 2px;
+  background: var(--navy-700);
+}
+
+.explorer-tabs button:first-child[aria-selected="true"]::after {
+  left: 0;
+}
+
+.explorer-tabs button:focus-visible {
+  outline-offset: -2px;
+}
+
+.explorer-panel {
+  display: grid;
+  gap: 2rem;
+}
+
+.explorer-media {
+  aspect-ratio: 4 / 3;
+}
+
+.explorer-copy {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 1.25rem;
+}
+
+.explorer-copy h3 {
+  font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.25rem);
+  font-weight: 620;
+  font-stretch: 110%;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.explorer-copy > p {
+  max-width: 32rem;
+}
+
+/* Narrow screens: wrapping pills instead of a scrolling underline row. */
+@media (max-width: 39.99rem) {
+  .explorer-tabs {
+    flex-wrap: wrap;
+    border-bottom: 0;
+  }
+
+  .explorer-tabs button,
+  .explorer-tabs button:first-child {
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: var(--paper);
+    font-size: 0.9375rem;
+  }
+
+  .explorer-tabs button[aria-selected="true"] {
+    border-color: var(--navy-700);
+    background: var(--navy-700);
+    color: #fff;
+  }
+
+  .explorer-tabs button[aria-selected="true"]::after {
+    display: none;
+  }
+}
+
+@media (min-width: 64rem) {
+  .explorer-panel {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 4rem;
+  }
+}

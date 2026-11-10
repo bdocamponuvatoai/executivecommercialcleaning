@@ -1,0 +1,358 @@
+.planner {
+  padding: clamp(1.25rem, 4vw, 3rem);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+/* Progress: three bars in the brand accents, filled as each step is reached. */
+.planner-progress {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.planner-progress li {
+  display: grid;
+  gap: 0.625rem;
+}
+
+.planner-progress-bar {
+  height: 4px;
+  border-radius: 4px;
+  background: var(--line-strong);
+  transition: background-color 0.3s var(--ease);
+}
+
+.planner-progress li:not([data-state="todo"]) .planner-progress-bar {
+  background: var(--tri);
+}
+
+.planner-progress-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 560;
+  line-height: 1.3;
+  color: var(--muted);
+}
+
+.planner-progress li:not([data-state="todo"]) .planner-progress-label {
+  color: var(--ink);
+}
+
+.planner-progress-label .icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--leaf-ink);
+  stroke-width: 2.5;
+}
+
+.planner-step {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.planner-count {
+  font-size: 0.875rem;
+  font-weight: 560;
+  color: var(--muted);
+}
+
+.planner-step h2,
+.planner-review h2 {
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.375rem);
+}
+
+.planner-intro {
+  color: var(--muted);
+}
+
+.planner-fields {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.field-label,
+.planner legend {
+  font-size: 0.9375rem;
+  font-weight: 580;
+  color: var(--ink);
+}
+
+.planner legend {
+  margin-bottom: 0.75rem;
+}
+
+.field-label small,
+.planner legend small {
+  margin-left: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.field :is(input, select, textarea) {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 1rem;
+  transition:
+    border-color 0.15s var(--ease),
+    box-shadow 0.15s var(--ease);
+}
+
+.field textarea {
+  min-height: 7.5rem;
+  resize: vertical;
+}
+
+.field select {
+  padding-right: 2.75rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e1a2b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-position: right 1rem center;
+  background-repeat: no-repeat;
+  background-size: 1rem;
+}
+
+.field :is(input, select, textarea):hover {
+  border-color: var(--control-hover);
+}
+
+.field :is(input, select, textarea):focus {
+  outline: none;
+  border-color: var(--navy-700);
+  box-shadow: 0 0 0 3px rgb(26 60 105 / 0.18);
+}
+
+.field ::placeholder {
+  color: #6b7786;
+}
+
+.field-row {
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* Radio and checkbox tiles: the native input covers the tile, invisible but focusable. */
+.choice-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.choice {
+  position: relative;
+  display: flex;
+}
+
+.choice input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.choice span {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  font-size: 0.9375rem;
+  font-weight: 540;
+  line-height: 1.3;
+  color: var(--ink);
+  transition:
+    border-color 0.15s var(--ease),
+    background-color 0.15s var(--ease);
+}
+
+.choice span::before {
+  content: "";
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 1.5px solid var(--control-hover);
+  border-radius: 50%;
+  background: #fff;
+  transition:
+    background-color 0.15s var(--ease),
+    border-color 0.15s var(--ease);
+}
+
+.choice input[type="checkbox"] + span::before {
+  border-radius: 4px;
+}
+
+.choice:hover span {
+  border-color: var(--control-hover);
+}
+
+.choice input:checked + span {
+  border-color: var(--navy-700);
+  background: #edf2f8;
+}
+
+.choice input:checked + span::before {
+  border-color: var(--navy-700);
+  background: var(--navy-700);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+.choice input[type="checkbox"]:checked + span::before {
+  box-shadow: none;
+  background: var(--navy-700)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7'/%3E%3C/svg%3E")
+    center / 0.75rem no-repeat;
+}
+
+.choice input:focus-visible + span {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.planner-peek {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.planner-peek-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.planner-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-strong);
+}
+
+.planner-nav .btn-secondary {
+  margin-right: auto;
+}
+
+.planner-note {
+  margin-top: 1.25rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.planner-note a {
+  color: var(--navy-700);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.planner-review {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+}
+
+.planner-review-check {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--leaf-tint);
+  color: var(--leaf-ink);
+}
+
+.planner-review-check .icon {
+  stroke-width: 2.5;
+}
+
+.summary {
+  width: 100%;
+  margin-block: 0.75rem 1rem;
+  border-top: 1px solid var(--line-strong);
+}
+
+.summary div {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--line-strong);
+  font-size: 0.9375rem;
+}
+
+.summary dt {
+  color: var(--muted);
+}
+
+.summary dd {
+  color: var(--ink);
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.planner-review .planner-note {
+  margin-top: 0;
+}
+
+.planner-review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.planner-status {
+  min-height: 1.5em;
+  font-size: 0.875rem;
+  color: var(--leaf-ink);
+}
+
+@media (min-width: 30rem) {
+  .choice-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .summary div {
+    grid-template-columns: 7.5rem 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 40rem) {
+  .field-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 48rem) {
+  .choice-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

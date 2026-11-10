@@ -1,0 +1,144 @@
+/* Services overview */
+.service-cards {
+  display: grid;
+  gap: 3rem 2rem;
+  padding-bottom: calc(var(--space-section) / 2);
+}
+
+.service-card {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 0.875rem;
+}
+
+.service-card-media {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+.service-card-media .media {
+  aspect-ratio: 3 / 2;
+}
+
+.service-card-media img {
+  transition: transform 0.6s var(--ease);
+}
+
+.service-card:hover .service-card-media img {
+  transform: scale(1.03);
+}
+
+.service-card h2 {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+}
+
+.service-card h2 a:hover {
+  color: var(--navy-700);
+}
+
+.service-card > p:not(.kicker) {
+  max-width: 34rem;
+}
+
+/* Service detail */
+.service-hero {
+  display: grid;
+  gap: 2.5rem;
+  padding-block: clamp(2rem, 5vw, 4rem) calc(var(--space-section) / 2);
+}
+
+.service-hero > div {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 1.25rem;
+}
+
+.service-hero h1 {
+  font-size: clamp(2.5rem, 1.6rem + 3.6vw, 5rem);
+}
+
+.service-hero .lead {
+  color: var(--ink);
+}
+
+.service-hero > div > p:not(.lead, .kicker) {
+  max-width: 32rem;
+}
+
+.service-hero .actions {
+  margin-top: 0.75rem;
+}
+
+.service-hero-media {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+}
+
+.breadcrumb {
+  margin-bottom: 0.5rem;
+}
+
+.breadcrumb a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 560;
+  color: var(--muted);
+}
+
+.breadcrumb a:hover {
+  color: var(--ink);
+}
+
+.breadcrumb .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.scope {
+  display: grid;
+  gap: 2rem;
+}
+
+.scope > div:first-child {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.scope > div:first-child p {
+  max-width: 28rem;
+  color: var(--muted);
+}
+
+.scope .fine-print {
+  margin-top: 1.75rem;
+}
+
+@media (min-width: 48rem) {
+  .service-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem 2.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .service-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: 4.5rem;
+  }
+
+  .service-hero-media {
+    aspect-ratio: 5 / 4;
+  }
+
+  .scope {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 4rem;
+  }
+}

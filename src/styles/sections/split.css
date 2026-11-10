@@ -1,0 +1,30 @@
+/* Two-column section: a short intro on the left, the content list on the right. */
+.split {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.split-intro {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 1.25rem;
+}
+
+.split-intro p {
+  max-width: 28rem;
+  color: var(--muted);
+}
+
+@media (min-width: 64rem) {
+  .split {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 4rem;
+  }
+
+  .split-intro {
+    position: sticky;
+    top: calc(var(--header-h) + 2rem);
+    align-self: start;
+  }
+}

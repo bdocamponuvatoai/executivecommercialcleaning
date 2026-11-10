@@ -1,0 +1,294 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+}
+
+html.menu-open,
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 620;
+  font-stretch: 110%;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 1.7rem + 3.4vw, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(1.875rem, 1.35rem + 2vw, 3rem);
+}
+
+h3 {
+  font-size: 1.3125rem;
+  font-weight: 600;
+  font-stretch: 104%;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+address {
+  font-style: normal;
+}
+
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+::selection {
+  background: #cfe2f1;
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+h1[tabindex="-1"]:focus,
+h2[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.container {
+  width: min(100% - 2 * var(--gutter), var(--max));
+  margin-inline: auto;
+}
+
+/* Adjacent sections share their half paddings, giving one full gap between them. */
+.section {
+  padding-block: calc(var(--space-section) / 2);
+}
+
+.section-tight {
+  padding-bottom: calc(var(--space-section) / 2);
+}
+
+.section:has(+ .contact-band),
+.section-tight:has(+ .contact-band) {
+  padding-bottom: var(--space-section);
+}
+
+.band-surface {
+  padding-block: var(--space-section);
+  background: var(--surface);
+}
+
+.band-surface + .section {
+  padding-top: var(--space-section);
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem 3rem;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.section-head p {
+  max-width: 26rem;
+  color: var(--muted);
+}
+
+.section-title {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.lead {
+  font-size: clamp(1.125rem, 1.02rem + 0.4vw, 1.3125rem);
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.kicker {
+  font-size: 0.875rem;
+  font-weight: 560;
+  color: var(--muted);
+}
+
+.fine-print {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.fine-print a {
+  color: var(--navy-700);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+
+.skip-link {
+  position: fixed;
+  top: -4rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: #fff;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Three rising bars: the yellow, blue and green building edges in the logo. */
+.stripes {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 2.25rem;
+}
+
+.stripes i {
+  width: 3px;
+  height: 60%;
+  border-radius: 2px;
+  background: var(--sun);
+}
+
+.stripes i:nth-child(2) {
+  height: 82%;
+  background: var(--sky);
+}
+
+.stripes i:nth-child(3) {
+  height: 100%;
+  background: var(--leaf);
+}
+
+/* Lists whose items carry the three brand accents in order (steps, principles). */
+.tri > :nth-child(3n + 1) {
+  --tri: var(--sun);
+}
+
+.tri > :nth-child(3n + 2) {
+  --tri: var(--sky);
+}
+
+.tri > :nth-child(3n + 3) {
+  --tri: var(--leaf);
+}
+
+@media (min-width: 48rem) {
+  body {
+    font-size: 1.0625rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
+}

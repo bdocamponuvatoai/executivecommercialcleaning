@@ -1,0 +1,63 @@
+.about-intro {
+  display: grid;
+  align-items: start;
+  gap: 2.5rem;
+}
+
+.about-intro > div {
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+  max-width: 36rem;
+}
+
+.location {
+  display: grid;
+  gap: 2rem;
+}
+
+.location > div:first-child {
+  display: grid;
+  gap: 1rem;
+}
+
+.location > div:first-child p {
+  max-width: 28rem;
+  color: var(--muted);
+}
+
+.location-card {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.location-card > .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--navy-700);
+}
+
+.location-card address {
+  font-size: 1.25rem;
+  font-weight: 580;
+  font-stretch: 106%;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+@media (min-width: 64rem) {
+  .about-intro {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 5rem;
+  }
+
+  .location {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    gap: 4rem;
+  }
+}

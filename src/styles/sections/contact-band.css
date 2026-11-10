@@ -1,0 +1,64 @@
+.contact-band {
+  padding-block: clamp(4rem, 8vw, 7rem);
+  background: var(--navy-800);
+  color: #c9d6e6;
+}
+
+.contact-band :focus-visible {
+  outline-color: #fff;
+}
+
+.contact-band-grid {
+  display: grid;
+  gap: 3rem;
+}
+
+.contact-band h2 {
+  max-width: 14ch;
+  margin-top: 1.5rem;
+  color: #fff;
+}
+
+.contact-band p {
+  max-width: 34rem;
+  margin-top: 1.25rem;
+}
+
+.contact-band .actions {
+  margin-top: 2rem;
+}
+
+.contact-band-details {
+  display: grid;
+  align-content: end;
+  gap: 1.5rem;
+}
+
+.contact-band-details div {
+  padding-top: 1rem;
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+}
+
+.contact-band-details dt {
+  font-size: 0.8125rem;
+  color: #9fb3cb;
+}
+
+.contact-band-details dd {
+  margin-top: 0.25rem;
+  font-weight: 540;
+  color: #fff;
+}
+
+.contact-band-details a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (min-width: 64rem) {
+  .contact-band-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    align-items: end;
+    gap: 5rem;
+  }
+}
